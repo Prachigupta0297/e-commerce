@@ -26,7 +26,10 @@ export default function Navbar() {
 
 
   useEffect(()=>{
-    dispatch(searchUser(searchData));
+    let timerOut =setTimeout(()=> {
+      dispatch(searchUser(searchData));
+    },1000);
+    return ()=> clearTimeout(timerOut);
   },[searchData]);
 
   useEffect(()=>{
@@ -34,11 +37,11 @@ export default function Navbar() {
 },[cart])
 
   return (
-    <MDBNavbar light bgColor='light'>
+    <MDBNavbar className='text-light bg-dark'>
       <MDBContainer fluid>
  
-        <MDBNavbarBrand>Fashion</MDBNavbarBrand>
-        <Link to="/profile"><MDBNavbarBrand>Hii {users} !</MDBNavbarBrand></Link>
+        {/* <MDBNavbarBrand>Fashion</MDBNavbarBrand> */}
+        <Link to="/profile"><MDBNavbarBrand className='text-light'>Hii {users} !</MDBNavbarBrand></Link>
         <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
           <input className='form-control' placeholder="Type query" aria-label="Search" type='Search' onChange={(e)=> setSearchData(e.target.value)} />
           <MDBBtn outline>Search</MDBBtn>
@@ -47,8 +50,14 @@ export default function Navbar() {
         <Link to="/cart"><MDBBtn color='secondary'>
           Cart({totalQuantity})</MDBBtn></Link>
 
-          <Link to="/login"><MDBBtn color='secondary'>Login</MDBBtn></Link>
-          <Link to="/login"><MDBBtn color='secondary' onClick={()=> dispatch(logout())}>Logout</MDBBtn></Link>
+{
+  users ?
+  <Link to="/login"><MDBBtn color='secondary' onClick={()=> dispatch(logout())}>Log</MDBBtn></Link>
+  :
+  <Link to="/login"><MDBBtn color='secondary'>Log</MDBBtn></Link>
+}
+          
+          
      
       </MDBContainer>
     </MDBNavbar>

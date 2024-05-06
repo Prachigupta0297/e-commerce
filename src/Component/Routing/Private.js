@@ -6,16 +6,18 @@ import OrderDetails from "../Pages/OrderDetails";
 import ProductNoFound from "../Pages/ProductNoFound";
 import ProductDetails from "../Pages/ProductDetails";
 import ProfileDetails from "../Pages/ProfileDetails";
-
+import Page404 from "../Pages/Page404";
+import Error from "../Pages/Error";
 const Private = () => {
   return (
     <Routes>
       <Route exact path="/" element={<ProductCard />} />
       <Route exact path="/product/:id" element={<ProductDetails/>} />
-      <Route path="/cart" element={<CardDetails />} />
-      <Route path="/order" element={<OrderDetails />} />
-      <Route path="/nofound" element={<ProductNoFound/>}/>
-      <Route path="/profile" element={<ProfileDetails/>}/>
+      <Route exact path="/cart" element={<CardDetails />} />
+      <Route exact path="/order" element={<OrderDetails />} />
+      <Route exact path="/nofound" element={<ProductNoFound/>}/>
+      <Route exact path="/profile" element={<ProfileDetails/>}/>
+       <Route exact path="*" element={<Error/>}/>
     </Routes>
   );
 };
